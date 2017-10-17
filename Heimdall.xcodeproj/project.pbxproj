@@ -12,6 +12,7 @@
 		B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */; };
 		B3A9A1FF1F96B67300F5C8FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */; };
 		B3A9A2021F96B67300F5C8FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */; };
+		B3D66B981F96BFB300A53C4C /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D66B971F96BFB300A53C4C /* AppRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		B3A9A2031F96B67300F5C8FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A9A2081F96B67400F5C8FA /* HeimdallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeimdallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A9A20E1F96B67400F5C8FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3D66B971F96BFB300A53C4C /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		E323BDE646CF4227EADEF27C /* Pods_Heimdall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heimdall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */,
+				B3D66B971F96BFB300A53C4C /* AppRouter.swift */,
 				B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */,
 				B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */,
 				B3A9A2031F96B67300F5C8FA /* Info.plist */,
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3D66B981F96BFB300A53C4C /* AppRouter.swift in Sources */,
 				B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
