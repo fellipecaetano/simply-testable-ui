@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
     }
