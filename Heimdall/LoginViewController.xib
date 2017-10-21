@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Heimdall" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="john.doe@example.com" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k7H-Fe-X93">
+                    <rect key="frame" x="32" y="52" width="327" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="tXD-ev-Rz0"/>
+                    </constraints>
+                    <color key="textColor" red="0.18823529411764706" green="0.19215686274509802" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2a-Tl-ct8" userLabel="Separator">
+                    <rect key="frame" x="32" y="108" width="343" height="0.5"/>
+                    <color key="backgroundColor" red="0.83529411764705885" green="0.83529411764705885" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="TCt-fI-bmK"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="∙∙∙∙∙∙∙∙∙" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-71-QaX">
+                    <rect key="frame" x="32" y="172.5" width="326.5" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="uOD-bB-V64"/>
+                    </constraints>
+                    <color key="textColor" red="0.18823529410000001" green="0.19215686269999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEa-Ir-abX" userLabel="Separator">
+                    <rect key="frame" x="32" y="229" width="343" height="0.5"/>
+                    <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="bJM-Fi-nbk"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jq7-ke-hCf">
+                    <rect key="frame" x="32" y="293.5" width="327" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Do it"/>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6vv-WP-YOT">
+                    <rect key="frame" x="339" y="299" width="20" height="20"/>
+                </activityIndicatorView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This e-mail address has an invalid format" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wat-vY-dpl">
+                    <rect key="frame" x="32" y="116.5" width="327" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.8901960784313725" green="0.15686274509803921" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This password has less than 8 characters" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgV-Z7-Trl">
+                    <rect key="frame" x="32" y="237.5" width="327" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.89019607840000003" green="0.15686274510000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="TgV-Z7-Trl" firstAttribute="trailing" secondItem="ft8-71-QaX" secondAttribute="trailing" id="6cx-HP-2Nf"/>
+                <constraint firstItem="jq7-ke-hCf" firstAttribute="leading" secondItem="k7H-Fe-X93" secondAttribute="leading" id="6sg-td-unj"/>
+                <constraint firstItem="k7H-Fe-X93" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="EIH-Xb-cdb"/>
+                <constraint firstItem="Z2a-Tl-ct8" firstAttribute="top" secondItem="k7H-Fe-X93" secondAttribute="bottom" id="GzP-2z-7da"/>
+                <constraint firstItem="Z2a-Tl-ct8" firstAttribute="leading" secondItem="k7H-Fe-X93" secondAttribute="leading" id="Jku-f0-IMh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Z2a-Tl-ct8" secondAttribute="trailing" id="KR6-sC-iOb"/>
+                <constraint firstItem="oEa-Ir-abX" firstAttribute="leading" secondItem="ft8-71-QaX" secondAttribute="leading" id="PiV-Tu-AcW"/>
+                <constraint firstItem="Wat-vY-dpl" firstAttribute="trailing" secondItem="k7H-Fe-X93" secondAttribute="trailing" id="QdV-uG-Jge"/>
+                <constraint firstItem="Wat-vY-dpl" firstAttribute="top" secondItem="Z2a-Tl-ct8" secondAttribute="bottom" constant="8" id="Rta-aj-7fr"/>
+                <constraint firstItem="oEa-Ir-abX" firstAttribute="leading" secondItem="Z2a-Tl-ct8" secondAttribute="leading" id="TzP-7Q-IeF"/>
+                <constraint firstItem="ft8-71-QaX" firstAttribute="height" secondItem="k7H-Fe-X93" secondAttribute="height" id="Wnw-zp-ccQ"/>
+                <constraint firstItem="TgV-Z7-Trl" firstAttribute="top" secondItem="oEa-Ir-abX" secondAttribute="bottom" constant="8" id="ZLI-ln-5Fy"/>
+                <constraint firstItem="k7H-Fe-X93" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="cnm-ru-0Dr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ft8-71-QaX" secondAttribute="trailing" constant="16" id="dae-Z5-nGP"/>
+                <constraint firstItem="ft8-71-QaX" firstAttribute="leading" secondItem="k7H-Fe-X93" secondAttribute="leading" id="fEA-wx-8c0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k7H-Fe-X93" secondAttribute="trailing" constant="16" id="fv1-6e-EyQ"/>
+                <constraint firstItem="oEa-Ir-abX" firstAttribute="trailing" secondItem="Z2a-Tl-ct8" secondAttribute="trailing" id="h5F-DL-frc"/>
+                <constraint firstItem="6vv-WP-YOT" firstAttribute="centerY" secondItem="jq7-ke-hCf" secondAttribute="centerY" id="hEo-ku-o5z"/>
+                <constraint firstItem="jq7-ke-hCf" firstAttribute="top" secondItem="oEa-Ir-abX" secondAttribute="bottom" constant="64" id="qQO-6S-8e4"/>
+                <constraint firstItem="oEa-Ir-abX" firstAttribute="top" secondItem="ft8-71-QaX" secondAttribute="bottom" id="rJd-H6-HkT"/>
+                <constraint firstItem="jq7-ke-hCf" firstAttribute="trailing" secondItem="k7H-Fe-X93" secondAttribute="trailing" id="rgX-7z-oDW"/>
+                <constraint firstItem="TgV-Z7-Trl" firstAttribute="leading" secondItem="ft8-71-QaX" secondAttribute="leading" id="rmM-XE-YEk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6vv-WP-YOT" secondAttribute="trailing" constant="16" id="vhP-WF-kpZ"/>
+                <constraint firstItem="ft8-71-QaX" firstAttribute="top" secondItem="Z2a-Tl-ct8" secondAttribute="bottom" constant="64" id="wSY-zd-CEi"/>
+                <constraint firstItem="Wat-vY-dpl" firstAttribute="leading" secondItem="k7H-Fe-X93" secondAttribute="leading" id="z70-c3-hfi"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

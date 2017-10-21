@@ -11,8 +11,8 @@ final class AppRouter {
     }
 
     private func showInitialViewController() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .blue
+        let viewController = LoginViewController()
+        viewController.title = "Login"
         navigationController.pushViewController(viewController, animated: false)
     }
 }
