@@ -107,14 +107,6 @@
                 <constraint firstItem="Wat-vY-dpl" firstAttribute="leading" secondItem="k7H-Fe-X93" secondAttribute="leading" id="z70-c3-hfi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <connections>
-                <outlet property="activityIndicator" destination="6vv-WP-YOT" id="cTM-Tv-g2l"/>
-                <outlet property="button" destination="jq7-ke-hCf" id="JH9-yW-bbX"/>
-                <outlet property="emailTextField" destination="k7H-Fe-X93" id="UUJ-yw-BnO"/>
-                <outlet property="emailValidationLabel" destination="Wat-vY-dpl" id="a09-Um-nnG"/>
-                <outlet property="passwordTextField" destination="ft8-71-QaX" id="hGO-43-oQb"/>
-                <outlet property="passwordValidationLabel" destination="TgV-Z7-Trl" id="l0c-aB-8kh"/>
-            </connections>
         </view>
     </objects>
 </document>
