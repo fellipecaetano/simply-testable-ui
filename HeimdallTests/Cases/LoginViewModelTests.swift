@@ -38,4 +38,24 @@ class LoginViewModelTests: XCTestCase {
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
         expect(observer.values) == [false]
     }
+
+    func testIfButtonIsEnabledWhenEmailIsInvalid() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
+
+        viewModel.input.email.onNext("john.doe@example")
+        viewModel.input.password.onNext("password")
+
+        expect(observer.values) == [false, false]
+    }
+
+    func testIfButtonIsEnabledWhenPasswordIsTooShort() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
+
+        viewModel.input.email.onNext("john.doe@example.com")
+        viewModel.input.password.onNext("pwd")
+
+        expect(observer.values) == [false, false]
+    }
 }

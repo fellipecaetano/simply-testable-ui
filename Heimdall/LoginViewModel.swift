@@ -26,8 +26,10 @@ final class LoginViewModel {
 
 private extension LoginViewModel {
     struct Transforms {
-        static func isButtonEnabled(email: Observable<String?>,
-                                    password: Observable<String?>) -> Observable<Bool> {
+        static func isButtonEnabled(
+            email: Observable<String?>,
+            password: Observable<String?>
+        ) -> Observable<Bool> {
             return Observable
                 .combineLatest(email, password)
                 .map(Mappings.isButtonEnabled(email:password:))
@@ -38,8 +40,8 @@ private extension LoginViewModel {
     struct Mappings {
         static func isButtonEnabled(email: String?, password: String?) -> Bool {
             if let email = email, let password = password {
-                return !email.trimmingCharacters(in: .whitespaces).isEmpty
-                    && !password.trimmingCharacters(in: .whitespaces).isEmpty
+                return Validations.validate(email: email)
+                    && Validations.validate(password: password, minimumLength: 5)
             } else {
                 return false
             }
