@@ -8,5 +8,7 @@ target 'Heimdall' do
 
   target 'HeimdallTests' do
     inherit! :search_paths
+
+    pod 'Nimble'
   end
 end
