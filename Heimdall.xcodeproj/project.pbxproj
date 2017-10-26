@@ -11,6 +11,7 @@
 		AC1A4E2BCF18F6F191E75655 /* Pods_HeimdallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A555AB3611B137FE089B6D1F /* Pods_HeimdallTests.framework */; };
 		B373D8B01FA18178005AC057 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8AF1FA18178005AC057 /* LoginViewModel.swift */; };
 		B373D8B41FA18247005AC057 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8B31FA18247005AC057 /* LoginViewModelTests.swift */; };
+		B373D8B61FA183FF005AC057 /* TestObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8B51FA183FF005AC057 /* TestObserver.swift */; };
 		B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */; };
 		B3A9A1FF1F96B67300F5C8FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */; };
 		B3A9A2021F96B67300F5C8FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		A555AB3611B137FE089B6D1F /* Pods_HeimdallTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HeimdallTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B373D8AF1FA18178005AC057 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B373D8B31FA18247005AC057 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		B373D8B51FA183FF005AC057 /* TestObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestObserver.swift; path = TestObserver.swift; sourceTree = "<group>"; };
 		B3A9A1F41F96B67300F5C8FA /* Heimdall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heimdall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		B373D8B11FA18230005AC057 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				B373D8B51FA183FF005AC057 /* TestObserver.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B373D8B41FA18247005AC057 /* LoginViewModelTests.swift in Sources */,
+				B373D8B61FA183FF005AC057 /* TestObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

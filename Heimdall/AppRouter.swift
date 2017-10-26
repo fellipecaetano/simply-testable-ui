@@ -11,7 +11,8 @@ final class AppRouter {
     }
 
     private func showInitialViewController() {
-        let viewController = LoginViewController()
+        let viewModel = LoginViewModel()
+        let viewController = LoginViewController(viewModel: viewModel)
         viewController.title = "Login"
         navigationController.pushViewController(viewController, animated: false)
     }

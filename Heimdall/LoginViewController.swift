@@ -11,12 +11,16 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
+    // Dependencies
+    private let viewModel: LoginViewModel
+
     // State
     private var session: URLSession!
     private let requests = PublishSubject<URLRequest>()
     private let disposeBag = DisposeBag()
 
-    init() {
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -64,6 +68,21 @@ final class LoginViewController: UIViewController {
             }, onError: { [unowned self] _ in
                 self.activityIndicator.stopAnimating()
             })
+            .disposed(by: disposeBag)
+
+        emailTextField.rx
+            .text
+            .bind(to: viewModel.input.email)
+            .disposed(by: disposeBag)
+
+        passwordTextField.rx
+            .text
+            .bind(to: viewModel.input.password)
+            .disposed(by: disposeBag)
+
+        viewModel.output
+            .isButtonEnabled
+            .bind(to: button.rx.isEnabled)
             .disposed(by: disposeBag)
     }
 }
