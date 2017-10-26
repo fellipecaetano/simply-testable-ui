@@ -2,7 +2,10 @@ import Foundation
 
 struct Validations {
     static func validate(email: String?) -> Bool {
-        let predicate = NSPredicate(format: "SELF matches %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")
+        let predicate = NSPredicate(
+            format: "SELF matches %@",
+            "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        )
 
         if let email = email {
             return !email.trimmingCharacters(in: .whitespaces).isEmpty
