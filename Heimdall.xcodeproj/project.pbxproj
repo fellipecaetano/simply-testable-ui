@@ -14,7 +14,6 @@
 		B3A9A2021F96B67300F5C8FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */; };
 		B3B3D8AD1F9BF92A00DB748D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B3D8AB1F9BF92A00DB748D /* LoginViewController.swift */; };
 		B3B3D8AE1F9BF92A00DB748D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B3D8AC1F9BF92A00DB748D /* LoginViewController.xib */; };
-		B3B3D8B01F9C104300DB748D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B3D8AF1F9C104300DB748D /* LoginView.swift */; };
 		B3D66B981F96BFB300A53C4C /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D66B971F96BFB300A53C4C /* AppRouter.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +42,6 @@
 		B3A9A20E1F96B67400F5C8FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B3D8AB1F9BF92A00DB748D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B3B3D8AC1F9BF92A00DB748D /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		B3B3D8AF1F9C104300DB748D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B3D66B971F96BFB300A53C4C /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		E323BDE646CF4227EADEF27C /* Pods_Heimdall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heimdall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -117,7 +115,6 @@
 				B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */,
 				B3A9A2031F96B67300F5C8FA /* Info.plist */,
 				B3B3D8AB1F9BF92A00DB748D /* LoginViewController.swift */,
-				B3B3D8AF1F9C104300DB748D /* LoginView.swift */,
 				B3B3D8AC1F9BF92A00DB748D /* LoginViewController.xib */,
 			);
 			path = Heimdall;
@@ -341,7 +338,6 @@
 			files = (
 				B3B3D8AD1F9BF92A00DB748D /* LoginViewController.swift in Sources */,
 				B3D66B981F96BFB300A53C4C /* AppRouter.swift in Sources */,
-				B3B3D8B01F9C104300DB748D /* LoginView.swift in Sources */,
 				B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
