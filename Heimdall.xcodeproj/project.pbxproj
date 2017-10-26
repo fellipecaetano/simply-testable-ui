@@ -108,11 +108,11 @@
 		B3A9A1EB1F96B67300F5C8FA = {
 			isa = PBXGroup;
 			children = (
+				39C488F78EB1810064F5E8CE /* Frameworks */,
 				B3A9A1F61F96B67300F5C8FA /* Heimdall */,
 				B3A9A20B1F96B67400F5C8FA /* HeimdallTests */,
-				B3A9A1F51F96B67300F5C8FA /* Products */,
 				4BB05DF8A75500135C6F2914 /* Pods */,
-				39C488F78EB1810064F5E8CE /* Frameworks */,
+				B3A9A1F51F96B67300F5C8FA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,11 +131,11 @@
 				B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */,
 				B3D66B971F96BFB300A53C4C /* AppRouter.swift */,
 				B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */,
-				B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */,
 				B3A9A2031F96B67300F5C8FA /* Info.plist */,
+				B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */,
 				B3B3D8AB1F9BF92A00DB748D /* LoginViewController.swift */,
-				B373D8AF1FA18178005AC057 /* LoginViewModel.swift */,
 				B3B3D8AC1F9BF92A00DB748D /* LoginViewController.xib */,
+				B373D8AF1FA18178005AC057 /* LoginViewModel.swift */,
 			);
 			path = Heimdall;
 			sourceTree = "<group>";
@@ -399,6 +399,7 @@
 				B3A9A2011F96B67300F5C8FA /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
