@@ -3,6 +3,36 @@ import Nimble
 @testable import Heimdall
 
 class LoginViewModelTests: XCTestCase {
+    func testEmailValidationWithValidEmail() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
+
+        viewModel.input.email.onNext("john.doe@example.com")
+
+        expect(observer.values.count) == 1
+        expect(observer.values[0]).to(beNil())
+    }
+
+    func testEmailValidationWithBlankEmail() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
+
+        viewModel.input.email.onNext(" ")
+
+        expect(observer.values.count) == 1
+        expect(observer.values[0]).to(beNil())
+    }
+
+    func testEmailValidationWithInvalidEmail() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
+
+        viewModel.input.email.onNext("john.doe@example")
+
+        expect(observer.values.count) == 1
+        expect(observer.values[0]) == Strings.invalidEmailMessage
+    }
+
     func testIfButtonIsEnabledWhenFormIsFilled() {
         let viewModel = LoginViewModel()
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)

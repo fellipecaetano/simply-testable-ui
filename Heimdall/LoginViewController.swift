@@ -81,6 +81,11 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
 
         viewModel.output
+            .emailValidation
+            .bind(to: emailValidationLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.output
             .isButtonEnabled
             .bind(to: button.rx.isEnabled)
             .disposed(by: disposeBag)

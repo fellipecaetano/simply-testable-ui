@@ -1,17 +1,20 @@
 import Foundation
 
 struct Validations {
-    static func validate(email: String?) -> Bool {
+    static func validate(email: String?) -> EmailValidation {
         let predicate = NSPredicate(
             format: "SELF matches %@",
             "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         )
 
-        if let email = email {
-            return !email.trimmingCharacters(in: .whitespaces).isEmpty
-                && predicate.evaluate(with: email)
+        if let email = email, email.trimmingCharacters(in: .whitespaces).isEmpty {
+            return .blank
+        } else if let email = email, !predicate.evaluate(with: email) {
+            return .invalidFormat
+        } else if email != nil {
+            return .ok
         } else {
-            return false
+            return .blank
         }
     }
 
@@ -22,4 +25,10 @@ struct Validations {
             return false
         }
     }
+}
+
+enum EmailValidation {
+    case ok
+    case blank
+    case invalidFormat
 }

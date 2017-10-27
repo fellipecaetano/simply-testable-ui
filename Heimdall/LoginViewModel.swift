@@ -8,6 +8,7 @@ final class LoginViewModel {
     }
 
     struct Output {
+        let emailValidation: Observable<String?>
         let isButtonEnabled: Observable<Bool>
     }
 
@@ -16,6 +17,7 @@ final class LoginViewModel {
 
     init() {
         output = Output(
+            emailValidation: Transforms.emailValidation(email: input.email),
             isButtonEnabled: Transforms.isButtonEnabled(
                 email: input.email,
                 password: input.password
@@ -26,10 +28,18 @@ final class LoginViewModel {
 
 private extension LoginViewModel {
     struct Transforms {
+        static func emailValidation(
+            email: Observable<String?>
+        ) -> Observable<String?> {
+
+            return email.map(Mappings.toValidation(email:))
+        }
+
         static func isButtonEnabled(
             email: Observable<String?>,
             password: Observable<String?>
         ) -> Observable<Bool> {
+
             return Observable
                 .combineLatest(email, password)
                 .map(Mappings.isButtonEnabled(email:password:))
@@ -38,10 +48,21 @@ private extension LoginViewModel {
     }
 
     struct Mappings {
+        static func toValidation(email: String?) -> String? {
+            if case .invalidFormat = Validations.validate(email: email) {
+                return Strings.invalidEmailMessage
+            } else {
+                return nil
+            }
+        }
+
         static func isButtonEnabled(email: String?, password: String?) -> Bool {
             if let email = email, let password = password {
-                return Validations.validate(email: email)
-                    && Validations.validate(password: password, minimumLength: 5)
+                return Validations.validate(email: email) == .ok
+                    && Validations.validate(
+                        password: password,
+                        minimumLength: 5
+                    )
             } else {
                 return false
             }
