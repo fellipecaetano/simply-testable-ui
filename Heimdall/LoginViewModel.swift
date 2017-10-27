@@ -9,6 +9,7 @@ final class LoginViewModel {
 
     struct Output {
         let emailValidation: Observable<String?>
+        let passwordValidation: Observable<String?>
         let isButtonEnabled: Observable<Bool>
     }
 
@@ -18,6 +19,7 @@ final class LoginViewModel {
     init() {
         output = Output(
             emailValidation: Transforms.emailValidation(email: input.email),
+            passwordValidation: Transforms.passwordValidation(password: input.password),
             isButtonEnabled: Transforms.isButtonEnabled(
                 email: input.email,
                 password: input.password
@@ -32,7 +34,28 @@ private extension LoginViewModel {
             email: Observable<String?>
         ) -> Observable<String?> {
 
-            return email.map(Mappings.toValidation(email:))
+            return email.map({ email in
+                switch Validations.validate(email: email) {
+                case .invalidFormat:
+                    return Strings.invalidEmailMessage
+                default:
+                    return nil
+                }
+            })
+        }
+
+        static func passwordValidation(
+            password: Observable<String?>
+        ) -> Observable<String?> {
+
+            return password.map({ password in
+                switch Validations.validate(password: password) {
+                case .short(let minimumLength):
+                    return Strings.shortPasswordMessage(minimumLength: minimumLength)
+                default:
+                    return nil
+                }
+            })
         }
 
         static func isButtonEnabled(
@@ -42,30 +65,15 @@ private extension LoginViewModel {
 
             return Observable
                 .combineLatest(email, password)
-                .map(Mappings.isButtonEnabled(email:password:))
+                .map({ email, password in
+                    if let email = email, let password = password {
+                        return Validations.validate(email: email) == .ok
+                            && Validations.validate(password: password) == .ok
+                    } else {
+                        return false
+                    }
+                })
                 .startWith(false)
-        }
-    }
-
-    struct Mappings {
-        static func toValidation(email: String?) -> String? {
-            if case .invalidFormat = Validations.validate(email: email) {
-                return Strings.invalidEmailMessage
-            } else {
-                return nil
-            }
-        }
-
-        static func isButtonEnabled(email: String?, password: String?) -> Bool {
-            if let email = email, let password = password {
-                return Validations.validate(email: email) == .ok
-                    && Validations.validate(
-                        password: password,
-                        minimumLength: 5
-                    )
-            } else {
-                return false
-            }
         }
     }
 }

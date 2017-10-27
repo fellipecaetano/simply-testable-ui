@@ -86,6 +86,11 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
 
         viewModel.output
+            .passwordValidation
+            .bind(to: passwordValidationLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.output
             .isButtonEnabled
             .bind(to: button.rx.isEnabled)
             .disposed(by: disposeBag)

@@ -18,17 +18,46 @@ struct Validations {
         }
     }
 
-    static func validate(password: String?, minimumLength: Int) -> Bool {
-        if let password = password {
-            return password.trimmingCharacters(in: .whitespaces).count >= minimumLength
+    static func validate(password: String?) -> PasswordValidation {
+        if let password = password,
+            password.trimmingCharacters(in: .whitespaces).isEmpty {
+
+            return .blank
+        } else if let password = password,
+            password.trimmingCharacters(in: .whitespaces).count < minimumLength {
+
+            return .short(minimumLength: minimumLength)
+        } else if password != nil {
+            return .ok
         } else {
-            return false
+            return .blank
         }
     }
+
+    private static let minimumLength = 5
 }
 
 enum EmailValidation {
     case ok
     case blank
     case invalidFormat
+}
+
+enum PasswordValidation: Equatable {
+    case ok
+    case blank
+    case short(minimumLength: Int)
+
+    static func == (lhs: PasswordValidation, rhs: PasswordValidation) -> Bool {
+        switch (lhs, rhs) {
+        case (.ok, .ok):
+            return true
+        case (.blank, .blank):
+            return true
+        case let (.short(lhsLength), .short(rhsLength)):
+            return lhsLength == rhsLength
+        default:
+            return false
+        }
+    }
 }

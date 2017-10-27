@@ -33,6 +33,36 @@ class LoginViewModelTests: XCTestCase {
         expect(observer.values[0]) == Strings.invalidEmailMessage
     }
 
+    func testPasswordValidationWithValidPassword() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
+
+        viewModel.input.password.onNext("admin123")
+
+        expect(observer.values.count) == 1
+        expect(observer.values[0]).to(beNil())
+    }
+
+    func testPasswordValidationWithBlankPassword() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
+
+        viewModel.input.password.onNext(" ")
+
+        expect(observer.values.count) == 1
+        expect(observer.values[0]).to(beNil())
+    }
+
+    func testPasswordValidationWithShortPassword() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
+
+        viewModel.input.password.onNext("adm")
+
+        expect(observer.values.count) == 1
+        expect(observer.values[0]) == Strings.shortPasswordMessage(minimumLength: 5)
+    }
+
     func testIfButtonIsEnabledWhenFormIsFilled() {
         let viewModel = LoginViewModel()
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
