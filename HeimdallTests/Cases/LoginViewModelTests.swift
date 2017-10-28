@@ -37,7 +37,7 @@ class LoginViewModelTests: XCTestCase {
         let viewModel = LoginViewModel()
         let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
 
-        viewModel.input.password.onNext("admin123")
+        viewModel.input.password.onNext("password")
 
         expect(observer.values.count) == 1
         expect(observer.values[0]).to(beNil())
@@ -57,7 +57,7 @@ class LoginViewModelTests: XCTestCase {
         let viewModel = LoginViewModel()
         let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
 
-        viewModel.input.password.onNext("adm")
+        viewModel.input.password.onNext("pwd")
 
         expect(observer.values.count) == 1
         expect(observer.values[0]) == Strings.shortPasswordMessage(minimumLength: 5)
@@ -117,5 +117,20 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.password.onNext("pwd")
 
         expect(observer.values) == [false, false]
+    }
+
+    func testActionWhenButtonIsTapped() {
+        let viewModel = LoginViewModel()
+        let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
+        let email = "john.doe@example"
+        let password = "password"
+
+        viewModel.input.email.onNext(email)
+        viewModel.input.password.onNext(password)
+        viewModel.input.buttonTap.onNext(())
+
+        expect(observer.values) == [
+            LoginAction.login(email: email, password: password)
+        ]
     }
 }

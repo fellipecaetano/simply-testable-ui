@@ -5,12 +5,14 @@ final class LoginViewModel {
     struct Input {
         let email = PublishSubject<String?>()
         let password = PublishSubject<String?>()
+        let buttonTap = PublishSubject<Void>()
     }
 
     struct Output {
         let emailValidation: Observable<String?>
         let passwordValidation: Observable<String?>
         let isButtonEnabled: Observable<Bool>
+        let action: Observable<LoginAction>
     }
 
     let input = Input()
@@ -19,8 +21,15 @@ final class LoginViewModel {
     init() {
         output = Output(
             emailValidation: Transforms.emailValidation(email: input.email),
-            passwordValidation: Transforms.passwordValidation(password: input.password),
+            passwordValidation: Transforms.passwordValidation(
+                password: input.password
+            ),
             isButtonEnabled: Transforms.isButtonEnabled(
+                email: input.email,
+                password: input.password
+            ),
+            action: Transforms.action(
+                buttonTap: input.buttonTap,
                 email: input.email,
                 password: input.password
             )
@@ -50,7 +59,7 @@ private extension LoginViewModel {
 
             return password.map({ password in
                 switch Validations.validate(password: password) {
-                case .short(let minimumLength):
+                case let .short(minimumLength):
                     return Strings.shortPasswordMessage(minimumLength: minimumLength)
                 default:
                     return nil
@@ -74,6 +83,21 @@ private extension LoginViewModel {
                     }
                 })
                 .startWith(false)
+        }
+
+        static func action(
+            buttonTap: Observable<Void>,
+            email: Observable<String?>,
+            password: Observable<String?>
+        ) -> Observable<LoginAction> {
+
+            return buttonTap
+                .withLatestFrom(
+                    Observable.combineLatest(email, password)
+                )
+                .map({ email, password in
+                    LoginAction.login(email: email, password: password)
+                })
         }
     }
 }
