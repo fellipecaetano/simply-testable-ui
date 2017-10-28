@@ -17,6 +17,7 @@
 		B373D8CB1FA4C16C005AC057 /* LoginAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8CA1FA4C16C005AC057 /* LoginAction.swift */; };
 		B373D8CD1FA4C4DF005AC057 /* LoginInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8CC1FA4C4DF005AC057 /* LoginInterpreter.swift */; };
 		B373D8CF1FA4C537005AC057 /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8CE1FA4C537005AC057 /* LoginState.swift */; };
+		B373D8D11FA4C80B005AC057 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8D01FA4C80B005AC057 /* LoginError.swift */; };
 		B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */; };
 		B3A9A1FF1F96B67300F5C8FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */; };
 		B3A9A2021F96B67300F5C8FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */; };
@@ -49,6 +50,7 @@
 		B373D8CA1FA4C16C005AC057 /* LoginAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAction.swift; sourceTree = "<group>"; };
 		B373D8CC1FA4C4DF005AC057 /* LoginInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInterpreter.swift; sourceTree = "<group>"; };
 		B373D8CE1FA4C537005AC057 /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
+		B373D8D01FA4C80B005AC057 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		B3A9A1F41F96B67300F5C8FA /* Heimdall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heimdall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				B3B3D8AC1F9BF92A00DB748D /* LoginViewController.xib */,
 				B373D8AF1FA18178005AC057 /* LoginViewModel.swift */,
 				B373D8CC1FA4C4DF005AC057 /* LoginInterpreter.swift */,
+				B373D8D01FA4C80B005AC057 /* LoginError.swift */,
 				B373D8CA1FA4C16C005AC057 /* LoginAction.swift */,
 				B373D8CE1FA4C537005AC057 /* LoginState.swift */,
 				B373D8B71FA18AE6005AC057 /* Validations.swift */,
@@ -365,11 +368,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Heimdall/Pods-Heimdall-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
@@ -387,6 +392,7 @@
 			files = (
 				B373D8B01FA18178005AC057 /* LoginViewModel.swift in Sources */,
 				B373D8CF1FA4C537005AC057 /* LoginState.swift in Sources */,
+				B373D8D11FA4C80B005AC057 /* LoginError.swift in Sources */,
 				B3B3D8AD1F9BF92A00DB748D /* LoginViewController.swift in Sources */,
 				B3D66B981F96BFB300A53C4C /* AppRouter.swift in Sources */,
 				B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */,

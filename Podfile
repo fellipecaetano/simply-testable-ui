@@ -5,6 +5,7 @@ target 'Heimdall' do
 
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Result'
 
   target 'HeimdallTests' do
     inherit! :search_paths

@@ -2,8 +2,9 @@ import RxSwift
 import RxCocoa
 
 final class LoginInterpreter: ObserverType {
-    fileprivate let stateSubject = BehaviorRelay<LoginState>(value: .idle)
+    fileprivate let stateSubject = BehaviorSubject<LoginState>(value: .idle)
     private var session: URLSession?
+    private let disposeBag = DisposeBag()
 
     func on(_ event: Event<LoginAction>) {
         switch event {
@@ -28,17 +29,31 @@ final class LoginInterpreter: ObserverType {
         let body = toBody(email: email, password: password)
         let request = toRequest(url: url)(body)
 
-        stateSubject.accept(.inProgress)
-
         session!.rx
             .response(request: request)
+            .map(toState(response:data:))
+            .startWith(.inProgress)
             .observeOn(MainScheduler.asyncInstance)
+            .bind(to: stateSubject)
+            .disposed(by: disposeBag)
     }
 }
 
 extension Reactive where Base == LoginInterpreter {
     var state: Observable<LoginState> {
-        return base.stateSubject.asObservable()
+        return base.stateSubject
+    }
+}
+
+private func toState(response: HTTPURLResponse, data _: Data) -> LoginState {
+    if response.statusCode == 401 {
+        return .failed(LoginError.invalidCredentials)
+    } else if response.statusCode == 400 {
+        return .failed(LoginError.badRequest)
+    } else if (200 ..< 300) ~= response.statusCode {
+        return .successful
+    } else {
+        return .failed(LoginError.generalFailure)
     }
 }
 
