@@ -12,21 +12,29 @@ final class LoginViewModel {
         let emailValidation: Observable<String?>
         let passwordValidation: Observable<String?>
         let isButtonEnabled: Observable<Bool>
+        let isActivityIndicatorAnimating: Observable<Bool>
         let action: Observable<LoginAction>
     }
 
     let input = Input()
     let output: Output
 
-    init() {
+    init(state: Observable<LoginState>) {
         output = Output(
-            emailValidation: Transforms.emailValidation(email: input.email),
+            emailValidation: Transforms.emailValidation(
+                state: state,
+                email: input.email
+            ),
             passwordValidation: Transforms.passwordValidation(
+                state: state,
                 password: input.password
             ),
             isButtonEnabled: Transforms.isButtonEnabled(
                 email: input.email,
                 password: input.password
+            ),
+            isActivityIndicatorAnimating: Transforms.isActivityIndicatorAnimating(
+                state: state
             ),
             action: Transforms.action(
                 buttonTap: input.buttonTap,
@@ -40,10 +48,11 @@ final class LoginViewModel {
 private extension LoginViewModel {
     struct Transforms {
         static func emailValidation(
+            state: Observable<LoginState>,
             email: Observable<String?>
         ) -> Observable<String?> {
 
-            return email.map({ email in
+            let offlineValidation = email.map({ email -> String? in
                 switch Validations.validate(email: email) {
                 case .invalidFormat:
                     return Strings.invalidEmailMessage
@@ -51,13 +60,25 @@ private extension LoginViewModel {
                     return nil
                 }
             })
+
+            let stateValidation = state.map({ state -> String? in
+                switch state {
+                case .failed(LoginError.invalidCredentials):
+                    return Strings.invalidCredentialsMessage
+                default:
+                    return nil
+                }
+            })
+
+            return Observable.merge(offlineValidation, stateValidation)
         }
 
         static func passwordValidation(
+            state: Observable<LoginState>,
             password: Observable<String?>
         ) -> Observable<String?> {
 
-            return password.map({ password in
+            let offlineValidation = password.map({ password -> String? in
                 switch Validations.validate(password: password) {
                 case let .short(minimumLength):
                     return Strings.shortPasswordMessage(minimumLength: minimumLength)
@@ -65,6 +86,17 @@ private extension LoginViewModel {
                     return nil
                 }
             })
+
+            let stateValidation = state.map({ state -> String? in
+                switch state {
+                case .failed(LoginError.invalidCredentials):
+                    return Strings.invalidCredentialsMessage
+                default:
+                    return nil
+                }
+            })
+
+            return Observable.merge(offlineValidation, stateValidation)
         }
 
         static func isButtonEnabled(
@@ -83,6 +115,13 @@ private extension LoginViewModel {
                     }
                 })
                 .startWith(false)
+        }
+
+        static func isActivityIndicatorAnimating(
+            state: Observable<LoginState>
+        ) -> Observable<Bool> {
+
+            return state.map({ $0 == .inProgress })
         }
 
         static func action(

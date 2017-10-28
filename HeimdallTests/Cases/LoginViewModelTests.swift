@@ -4,7 +4,7 @@ import Nimble
 
 class LoginViewModelTests: XCTestCase {
     func testEmailValidationWithValidEmail() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
 
         viewModel.input.email.onNext("john.doe@example.com")
@@ -14,7 +14,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testEmailValidationWithBlankEmail() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
 
         viewModel.input.email.onNext(" ")
@@ -24,7 +24,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testEmailValidationWithInvalidEmail() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
 
         viewModel.input.email.onNext("john.doe@example")
@@ -33,8 +33,24 @@ class LoginViewModelTests: XCTestCase {
         expect(observer.values[0]) == Strings.invalidEmailMessage
     }
 
+    func testEmailValidationWhenCredentialsAreInvalid() {
+        let state = LoginState.failed(LoginError.invalidCredentials)
+        let viewModel = LoginViewModel(state: .just(state))
+        let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
+        expect(observer.values.count) == 1
+        expect(observer.values[0]) == Strings.invalidCredentialsMessage
+    }
+
+    func testEmailValidationWhenErrorsAreGeneral() {
+        let state = [LoginError.badRequest, .generalFailure].map(LoginState.failed)
+        let viewModel = LoginViewModel(state: .from(state))
+        let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
+        expect(observer.values.count) == state.count
+        expect(observer.values.flatMap({ $0 })).to(beEmpty())
+    }
+
     func testPasswordValidationWithValidPassword() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
 
         viewModel.input.password.onNext("password")
@@ -44,7 +60,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testPasswordValidationWithBlankPassword() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
 
         viewModel.input.password.onNext(" ")
@@ -54,7 +70,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testPasswordValidationWithShortPassword() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
 
         viewModel.input.password.onNext("pwd")
@@ -63,8 +79,24 @@ class LoginViewModelTests: XCTestCase {
         expect(observer.values[0]) == Strings.shortPasswordMessage(minimumLength: 5)
     }
 
+    func testPasswordValidationWhenCredentialsAreInvalid() {
+        let state = LoginState.failed(LoginError.invalidCredentials)
+        let viewModel = LoginViewModel(state: .just(state))
+        let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
+        expect(observer.values.count) == 1
+        expect(observer.values[0]) == Strings.invalidCredentialsMessage
+    }
+
+    func testPasswordValidationWhenErrorsAreGeneral() {
+        let state = [LoginError.badRequest, .generalFailure].map(LoginState.failed)
+        let viewModel = LoginViewModel(state: .from(state))
+        let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
+        expect(observer.values.count) == state.count
+        expect(observer.values.flatMap({ $0 })).to(beEmpty())
+    }
+
     func testIfButtonIsEnabledWhenFormIsFilled() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
 
         viewModel.input.email.onNext("john.doe@example.com")
@@ -74,7 +106,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testIfButtonIsEnabledWhenEmailIsEmpty() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
 
         viewModel.input.email.onNext("  ")
@@ -84,7 +116,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testIfButtonIsEnabledWhenPasswordIsEmpty() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
 
         viewModel.input.email.onNext("john.doe@example.com")
@@ -94,13 +126,13 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testIfButtonIsEnabledInitially() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
         expect(observer.values) == [false]
     }
 
     func testIfButtonIsEnabledWhenEmailIsInvalid() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
 
         viewModel.input.email.onNext("john.doe@example")
@@ -110,7 +142,7 @@ class LoginViewModelTests: XCTestCase {
     }
 
     func testIfButtonIsEnabledWhenPasswordIsTooShort() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<Bool>.bound(to: viewModel.output.isButtonEnabled)
 
         viewModel.input.email.onNext("john.doe@example.com")
@@ -119,8 +151,21 @@ class LoginViewModelTests: XCTestCase {
         expect(observer.values) == [false, false]
     }
 
+    func testIfActivityIndicatorIsAnimating() {
+        let state = [
+            LoginState.idle,
+            .inProgress,
+            .failed(LoginError.badRequest),
+            .successful
+        ]
+
+        let viewModel = LoginViewModel(state: .from(state))
+        let observer = TestObserver<Bool>.bound(to: viewModel.output.isActivityIndicatorAnimating)
+        expect(observer.values) == [false, true, false, false]
+    }
+
     func testActionWhenButtonIsTapped() {
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(state: .empty())
         let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
         let email = "john.doe@example"
         let password = "password"

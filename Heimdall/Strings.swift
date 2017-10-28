@@ -4,4 +4,7 @@ struct Strings {
     static func shortPasswordMessage(minimumLength: Int) -> String {
         return "This password has less than \(minimumLength) characters"
     }
+
+    static let invalidCredentialsMessage
+        = "No user corresponds to these credentials"
 }

@@ -12,11 +12,9 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     // Dependencies
-    private let viewModel: LoginViewModel
+    fileprivate let viewModel: LoginViewModel
 
     // State
-    private var session: URLSession!
-    private let requests = PublishSubject<URLRequest>()
     private let disposeBag = DisposeBag()
 
     init(viewModel: LoginViewModel) {
@@ -31,45 +29,6 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        session = URLSession(configuration: .default)
-        let url = URL(string: "https://heimdall-app.herokuapp.com/sessions")!
-
-        button.rx
-            .tap
-            .subscribe(onNext: { [unowned self] in
-                self.activityIndicator.startAnimating()
-            })
-            .disposed(by: disposeBag)
-
-        button.rx
-            .tap
-            .withLatestFrom(
-                Observable.combineLatest(
-                    emailTextField.rx.text,
-                    passwordTextField.rx.text
-                )
-            )
-            .map(toBody(email:password:))
-            .filter({ $0 != nil })
-            .map({ $0! })
-            .map(toRequest(url: url))
-            .bind(to: requests)
-            .disposed(by: disposeBag)
-
-        requests
-            .flatMap({ [unowned self] request in
-                self.session.rx
-                    .json(request: request)
-                    .observeOn(MainScheduler.asyncInstance)
-                    .catchErrorJustReturn(1)
-            })
-            .subscribe(onNext: { [unowned self] _ in
-                self.activityIndicator.stopAnimating()
-            }, onError: { [unowned self] _ in
-                self.activityIndicator.stopAnimating()
-            })
-            .disposed(by: disposeBag)
-
         emailTextField.rx
             .text
             .bind(to: viewModel.input.email)
@@ -78,6 +37,11 @@ final class LoginViewController: UIViewController {
         passwordTextField.rx
             .text
             .bind(to: viewModel.input.password)
+            .disposed(by: disposeBag)
+
+        button.rx
+            .tap
+            .bind(to: viewModel.input.buttonTap)
             .disposed(by: disposeBag)
 
         viewModel.output
@@ -94,23 +58,16 @@ final class LoginViewController: UIViewController {
             .isButtonEnabled
             .bind(to: button.rx.isEnabled)
             .disposed(by: disposeBag)
+
+        viewModel.output
+            .isActivityIndicatorAnimating
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
     }
 }
 
-private func toBody(email: String?, password: String?) -> [String: String]? {
-    guard let email = email, let password = password else {
-        return nil
-    }
-
-    return ["email": email, "password": password]
-}
-
-private func toRequest(url: URL) -> ([String: String]) -> URLRequest {
-    return { body in
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try! JSONSerialization.data(withJSONObject: body, options: [])
-        return request
+extension Reactive where Base == LoginViewController {
+    var action: Observable<LoginAction> {
+        return base.viewModel.output.action
     }
 }
