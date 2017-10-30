@@ -43,6 +43,10 @@ final class LoginViewModel {
             )
         )
     }
+
+    init(output: Output) {
+        self.output = output
+    }
 }
 
 private extension LoginViewModel {

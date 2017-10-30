@@ -19,6 +19,7 @@
 		B373D8CF1FA4C537005AC057 /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8CE1FA4C537005AC057 /* LoginState.swift */; };
 		B373D8D11FA4C80B005AC057 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8D01FA4C80B005AC057 /* LoginError.swift */; };
 		B373D8D31FA4D69E005AC057 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8D21FA4D69E005AC057 /* LoginService.swift */; };
+		B373D8D51FA62A24005AC057 /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373D8D41FA62A24005AC057 /* LoginViewControllerTests.swift */; };
 		B3A9A1F81F96B67300F5C8FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */; };
 		B3A9A1FF1F96B67300F5C8FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */; };
 		B3A9A2021F96B67300F5C8FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */; };
@@ -53,6 +54,8 @@
 		B373D8CE1FA4C537005AC057 /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
 		B373D8D01FA4C80B005AC057 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		B373D8D21FA4D69E005AC057 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		B373D8D41FA62A24005AC057 /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		B373D8DA1FA639F3005AC057 /* ReferenceImages_64 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ReferenceImages_64; sourceTree = "<group>"; };
 		B3A9A1F41F96B67300F5C8FA /* Heimdall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heimdall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A9A1F71F96B67300F5C8FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				B373D8B31FA18247005AC057 /* LoginViewModelTests.swift */,
+				B373D8D41FA62A24005AC057 /* LoginViewControllerTests.swift */,
 			);
 			path = Cases;
 			sourceTree = "<group>";
@@ -167,6 +171,7 @@
 		B3A9A20B1F96B67400F5C8FA /* HeimdallTests */ = {
 			isa = PBXGroup;
 			children = (
+				B373D8DA1FA639F3005AC057 /* ReferenceImages_64 */,
 				B373D8B21FA18237005AC057 /* Cases */,
 				B373D8B11FA18230005AC057 /* Support */,
 				B3A9A20E1F96B67400F5C8FA /* Info.plist */,
@@ -302,10 +307,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HeimdallTests/Pods-HeimdallTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,13 +378,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Heimdall/Pods-Heimdall-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
@@ -411,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B373D8D51FA62A24005AC057 /* LoginViewControllerTests.swift in Sources */,
 				B373D8B41FA18247005AC057 /* LoginViewModelTests.swift in Sources */,
 				B373D8B61FA183FF005AC057 /* TestObserver.swift in Sources */,
 			);
@@ -550,6 +556,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A17DBFB15D1222A008A86A60 /* Pods-Heimdall.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8Q86GGRUX8;
@@ -566,6 +573,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3CAEF597DF5C0FD88C9674E6 /* Pods-Heimdall.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8Q86GGRUX8;
@@ -582,7 +590,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57C9E7411D05657606BC093A /* Pods-HeimdallTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -602,7 +610,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60FF176FCBFB67B28DFE5C5E /* Pods-HeimdallTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
