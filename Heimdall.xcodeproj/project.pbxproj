@@ -120,8 +120,8 @@
 		B373D8B21FA18237005AC057 /* Cases */ = {
 			isa = PBXGroup;
 			children = (
-				B373D8B31FA18247005AC057 /* LoginViewModelTests.swift */,
 				B373D8D41FA62A24005AC057 /* LoginViewControllerTests.swift */,
+				B373D8B31FA18247005AC057 /* LoginViewModelTests.swift */,
 			);
 			path = Cases;
 			sourceTree = "<group>";
@@ -154,16 +154,16 @@
 				B3A9A1FE1F96B67300F5C8FA /* Assets.xcassets */,
 				B3A9A2031F96B67300F5C8FA /* Info.plist */,
 				B3A9A2001F96B67300F5C8FA /* LaunchScreen.storyboard */,
+				B373D8CA1FA4C16C005AC057 /* LoginAction.swift */,
+				B373D8D01FA4C80B005AC057 /* LoginError.swift */,
+				B373D8CC1FA4C4DF005AC057 /* LoginInterpreter.swift */,
+				B373D8D21FA4D69E005AC057 /* LoginService.swift */,
+				B373D8CE1FA4C537005AC057 /* LoginState.swift */,
 				B3B3D8AB1F9BF92A00DB748D /* LoginViewController.swift */,
 				B3B3D8AC1F9BF92A00DB748D /* LoginViewController.xib */,
 				B373D8AF1FA18178005AC057 /* LoginViewModel.swift */,
-				B373D8CC1FA4C4DF005AC057 /* LoginInterpreter.swift */,
-				B373D8D21FA4D69E005AC057 /* LoginService.swift */,
-				B373D8D01FA4C80B005AC057 /* LoginError.swift */,
-				B373D8CA1FA4C16C005AC057 /* LoginAction.swift */,
-				B373D8CE1FA4C537005AC057 /* LoginState.swift */,
-				B373D8B71FA18AE6005AC057 /* Validations.swift */,
 				B373D8C81FA3F6A3005AC057 /* Strings.swift */,
+				B373D8B71FA18AE6005AC057 /* Validations.swift */,
 			);
 			path = Heimdall;
 			sourceTree = "<group>";
@@ -171,10 +171,10 @@
 		B3A9A20B1F96B67400F5C8FA /* HeimdallTests */ = {
 			isa = PBXGroup;
 			children = (
-				B373D8DA1FA639F3005AC057 /* ReferenceImages_64 */,
 				B373D8B21FA18237005AC057 /* Cases */,
 				B373D8B11FA18230005AC057 /* Support */,
 				B3A9A20E1F96B67400F5C8FA /* Info.plist */,
+				B373D8DA1FA639F3005AC057 /* ReferenceImages_64 */,
 			);
 			path = HeimdallTests;
 			sourceTree = "<group>";
