@@ -10,7 +10,7 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.email.onNext("john.doe@example.com")
 
         expect(observer.values.count) == 1
-        expect(observer.values[0]).to(beNil())
+        expect(observer.values.flatMap({ $0 })).to(beEmpty())
     }
 
     func testEmailValidationWithBlankEmail() {
@@ -20,7 +20,7 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.email.onNext(" ")
 
         expect(observer.values.count) == 1
-        expect(observer.values[0]).to(beNil())
+        expect(observer.values.flatMap({ $0 })).to(beEmpty())
     }
 
     func testEmailValidationWithInvalidEmail() {
@@ -30,7 +30,7 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.email.onNext("john.doe@example")
 
         expect(observer.values.count) == 1
-        expect(observer.values[0]) == Strings.invalidEmailMessage
+        expect(observer.values.flatMap({ $0 })) == [Strings.invalidEmailMessage]
     }
 
     func testEmailValidationWhenCredentialsAreInvalid() {
@@ -38,7 +38,7 @@ class LoginViewModelTests: XCTestCase {
         let viewModel = LoginViewModel(state: .just(state))
         let observer = TestObserver<String?>.bound(to: viewModel.output.emailValidation)
         expect(observer.values.count) == 1
-        expect(observer.values[0]) == Strings.invalidCredentialsMessage
+        expect(observer.values.flatMap({ $0 })) == [Strings.invalidCredentialsMessage]
     }
 
     func testEmailValidationWhenErrorsAreGeneral() {
@@ -56,7 +56,7 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.password.onNext("password")
 
         expect(observer.values.count) == 1
-        expect(observer.values[0]).to(beNil())
+        expect(observer.values.flatMap({ $0 })).to(beEmpty())
     }
 
     func testPasswordValidationWithBlankPassword() {
@@ -66,7 +66,7 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.password.onNext(" ")
 
         expect(observer.values.count) == 1
-        expect(observer.values[0]).to(beNil())
+        expect(observer.values.flatMap({ $0 })).to(beEmpty())
     }
 
     func testPasswordValidationWithShortPassword() {
@@ -76,7 +76,7 @@ class LoginViewModelTests: XCTestCase {
         viewModel.input.password.onNext("pwd")
 
         expect(observer.values.count) == 1
-        expect(observer.values[0]) == Strings.shortPasswordMessage(minimumLength: 5)
+        expect(observer.values.flatMap({ $0 })) == [Strings.shortPasswordMessage(minimumLength: 5)]
     }
 
     func testPasswordValidationWhenCredentialsAreInvalid() {
@@ -84,7 +84,7 @@ class LoginViewModelTests: XCTestCase {
         let viewModel = LoginViewModel(state: .just(state))
         let observer = TestObserver<String?>.bound(to: viewModel.output.passwordValidation)
         expect(observer.values.count) == 1
-        expect(observer.values[0]) == Strings.invalidCredentialsMessage
+        expect(observer.values.flatMap({ $0 })) == [Strings.invalidCredentialsMessage]
     }
 
     func testPasswordValidationWhenErrorsAreGeneral() {
