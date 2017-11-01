@@ -28,41 +28,11 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpBindings()
+    }
 
-        emailTextField.rx
-            .text
-            .bind(to: viewModel.input.email)
-            .disposed(by: disposeBag)
-
-        passwordTextField.rx
-            .text
-            .bind(to: viewModel.input.password)
-            .disposed(by: disposeBag)
-
-        button.rx
-            .tap
-            .bind(to: viewModel.input.buttonTap)
-            .disposed(by: disposeBag)
-
-        viewModel.output
-            .emailValidation
-            .bind(to: emailValidationLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        viewModel.output
-            .passwordValidation
-            .bind(to: passwordValidationLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        viewModel.output
-            .isButtonEnabled
-            .bind(to: button.rx.isEnabled)
-            .disposed(by: disposeBag)
-
-        viewModel.output
-            .isActivityIndicatorAnimating
-            .bind(to: activityIndicator.rx.isAnimating)
-            .disposed(by: disposeBag)
+    private func setUpBindings() {
+        // TODO: complete
     }
 }
 
