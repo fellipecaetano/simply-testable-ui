@@ -10,6 +10,7 @@ target 'Heimdall' do
   target 'HeimdallTests' do
     inherit! :search_paths
 
+    pod 'Quick'
     pod 'Nimble'
     pod 'FBSnapshotTestCase'
   end
