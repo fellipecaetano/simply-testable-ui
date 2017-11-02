@@ -37,6 +37,7 @@ final class LoginViewModel {
                 state: state
             ),
             action: Transforms.action(
+                state: state,
                 buttonTap: input.buttonTap,
                 email: input.email,
                 password: input.password
@@ -87,6 +88,7 @@ private extension LoginViewModel {
         }
 
         static func action(
+            state _: Observable<LoginState>,
             buttonTap _: Observable<Void>,
             email _: Observable<String?>,
             password _: Observable<String?>

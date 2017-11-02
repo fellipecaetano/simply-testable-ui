@@ -19,6 +19,8 @@ final class LoginInterpreter: ObserverType, ReactiveCompatible {
         switch action {
         case let .login(email, password):
             login(email: email, password: password)
+        default:
+            break
         }
     }
 
@@ -27,6 +29,7 @@ final class LoginInterpreter: ObserverType, ReactiveCompatible {
 
         service
             .login(email: email, password: password)
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe(onSuccess: { [unowned self] in
                 self.stateRelay.accept(.successful)
             }, onError: { [unowned self] error in

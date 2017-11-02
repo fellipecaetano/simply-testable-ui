@@ -187,8 +187,10 @@ class LoginViewModelSpec: QuickSpec {
                         expect(observer.values.last) == false
                     }
                 }
+            }
 
-                context("when it is tapped") {
+            describe("the action stream") {
+                context("then the login button is tapped") {
                     it("emits a login action") {
                         let viewModel = LoginViewModel(state: .empty())
                         let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
@@ -202,6 +204,15 @@ class LoginViewModelSpec: QuickSpec {
                         expect(observer.values) == [
                             LoginAction.login(email: email, password: password)
                         ]
+                    }
+                }
+
+                context("when the state indicates success") {
+                    it("emits a success feedback action") {
+                        let state = [LoginState.successful, .inProgress, .successful]
+                        let viewModel = LoginViewModel(state: .from(state))
+                        let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
+                        expect(observer.values) == [.acknowledgeSuccess, .acknowledgeSuccess]
                     }
                 }
             }

@@ -47,7 +47,7 @@
                         <constraint firstAttribute="height" constant="0.5" id="TCt-fI-bmK"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="∙∙∙∙∙∙∙∙∙" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-71-QaX">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="∙∙∙∙∙∙∙∙∙" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-71-QaX">
                     <rect key="frame" x="32" y="172.5" width="326.5" height="56"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="56" id="uOD-bB-V64"/>
