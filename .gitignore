@@ -66,5 +66,15 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+# Cruft
 .DS_Store
+
+# vim
+*.swp
+
+# Assets
+Assets/
+
+# FBSnapshotTestCase
 FailureDiffs/
