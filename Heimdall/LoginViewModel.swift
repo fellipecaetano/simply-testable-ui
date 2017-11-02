@@ -37,6 +37,7 @@ final class LoginViewModel {
                 state: state
             ),
             action: Transforms.action(
+                state: state,
                 buttonTap: input.buttonTap,
                 email: input.email,
                 password: input.password
@@ -129,18 +130,25 @@ private extension LoginViewModel {
         }
 
         static func action(
+            state: Observable<LoginState>,
             buttonTap: Observable<Void>,
             email: Observable<String?>,
             password: Observable<String?>
         ) -> Observable<LoginAction> {
 
-            return buttonTap
+            let login = buttonTap
                 .withLatestFrom(
                     Observable.combineLatest(email, password)
                 )
                 .map({ email, password in
                     LoginAction.login(email: email, password: password)
                 })
+
+            let successAcknowledgement = state
+                .filter({ $0 == .successful })
+                .map({ _ in LoginAction.acknowledgeSuccess })
+
+            return Observable.merge(login, successAcknowledgement)
         }
     }
 }
