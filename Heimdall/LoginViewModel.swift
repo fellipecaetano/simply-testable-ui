@@ -53,17 +53,16 @@ final class LoginViewModel {
 private extension LoginViewModel {
     struct Transforms {
         static func emailValidation(
-            state _: Observable<LoginState>,
-            email _: Observable<String?>
+            state: Observable<LoginState>,
+            email: Observable<String?>
         ) -> Observable<String?> {
 
-            // TODO: complete
             return .empty()
         }
 
         static func passwordValidation(
-            state _: Observable<LoginState>,
-            password _: Observable<String?>
+            state: Observable<LoginState>,
+            password: Observable<String?>
         ) -> Observable<String?> {
 
             // TODO: complete
@@ -71,8 +70,8 @@ private extension LoginViewModel {
         }
 
         static func isButtonEnabled(
-            email _: Observable<String?>,
-            password _: Observable<String?>
+            email: Observable<String?>,
+            password: Observable<String?>
         ) -> Observable<Bool> {
 
             // TODO: complete
@@ -80,7 +79,7 @@ private extension LoginViewModel {
         }
 
         static func isActivityIndicatorAnimating(
-            state _: Observable<LoginState>
+            state: Observable<LoginState>
         ) -> Observable<Bool> {
 
             // TODO: complete
@@ -88,10 +87,10 @@ private extension LoginViewModel {
         }
 
         static func action(
-            state _: Observable<LoginState>,
-            buttonTap _: Observable<Void>,
-            email _: Observable<String?>,
-            password _: Observable<String?>
+            state: Observable<LoginState>,
+            buttonTap: Observable<Void>,
+            email: Observable<String?>,
+            password: Observable<String?>
         ) -> Observable<LoginAction> {
 
             // TODO: complete
