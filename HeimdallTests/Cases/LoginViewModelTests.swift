@@ -5,7 +5,7 @@ import RxSwift
 
 class LoginViewModelSpec: QuickSpec {
     override func spec() {
-        describe("the login UI's view model") {
+        describe("the login view model") {
             describe("its e-mail validation") {
                 context("when the e-mail is valid") {
                     it("emits an empty validation message") {
@@ -100,6 +100,7 @@ class LoginViewModelSpec: QuickSpec {
                         expect(observer.values.flatMap({ $0 })) == [Strings.shortPasswordMessage(minimumLength: 5)]
                     }
                 }
+
                 context("when the state indicates the credentials were rejected") {
                     it("emits an invalid credentials validation message") {
                         let state = LoginState.failed(LoginError.invalidCredentials)
@@ -189,34 +190,6 @@ class LoginViewModelSpec: QuickSpec {
                 }
             }
 
-            describe("the action stream") {
-                context("then the login button is tapped") {
-                    it("emits a login action") {
-                        let viewModel = LoginViewModel(state: .empty())
-                        let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
-                        let email = "john.doe@example"
-                        let password = "password"
-
-                        viewModel.input.email.onNext(email)
-                        viewModel.input.password.onNext(password)
-                        viewModel.input.buttonTap.onNext(())
-
-                        expect(observer.values) == [
-                            LoginAction.login(email: email, password: password)
-                        ]
-                    }
-                }
-
-                context("when the state indicates success") {
-                    it("emits a success feedback action") {
-                        let state = [LoginState.successful, .inProgress, .successful]
-                        let viewModel = LoginViewModel(state: .from(state))
-                        let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
-                        expect(observer.values) == [.acknowledgeSuccess, .acknowledgeSuccess]
-                    }
-                }
-            }
-
             describe("the activity indicator") {
                 context("when the state indicates the UI is idle") {
                     it("does not animate") {
@@ -247,6 +220,34 @@ class LoginViewModelSpec: QuickSpec {
                         let viewModel = LoginViewModel(state: .just(.successful))
                         let observer = TestObserver<Bool>.bound(to: viewModel.output.isActivityIndicatorAnimating)
                         expect(observer.values) == [false]
+                    }
+                }
+            }
+
+            describe("the action stream") {
+                context("then the login button is tapped") {
+                    it("emits a login action") {
+                        let viewModel = LoginViewModel(state: .empty())
+                        let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
+                        let email = "john.doe@example"
+                        let password = "password"
+
+                        viewModel.input.email.onNext(email)
+                        viewModel.input.password.onNext(password)
+                        viewModel.input.buttonTap.onNext(())
+
+                        expect(observer.values) == [
+                            LoginAction.login(email: email, password: password)
+                        ]
+                    }
+                }
+
+                context("when the state indicates success") {
+                    it("emits a success feedback action") {
+                        let state = [LoginState.successful, .inProgress, .successful]
+                        let viewModel = LoginViewModel(state: .from(state))
+                        let observer = TestObserver<LoginAction>.bound(to: viewModel.output.action)
+                        expect(observer.values) == [.acknowledgeSuccess, .acknowledgeSuccess]
                     }
                 }
             }
