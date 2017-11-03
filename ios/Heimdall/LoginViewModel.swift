@@ -57,7 +57,25 @@ private extension LoginViewModel {
             email: Observable<String?>
         ) -> Observable<String?> {
 
-            return .empty()
+            let inputValidation = email.map({ email -> String? in
+                switch Validations.validate(email: email) {
+                case .invalidFormat:
+                    return Strings.invalidEmailMessage
+                default:
+                    return nil
+                }
+            })
+
+            let stateValidation = state.map({ state -> String? in
+                switch state {
+                case .failed(LoginError.invalidCredentials):
+                    return Strings.invalidCredentialsMessage
+                default:
+                    return nil
+                }
+            })
+
+            return Observable.merge(inputValidation, stateValidation)
         }
 
         static func passwordValidation(
@@ -65,8 +83,25 @@ private extension LoginViewModel {
             password: Observable<String?>
         ) -> Observable<String?> {
 
-            // TODO: complete
-            return .empty()
+            let offlineValidation = password.map({ password -> String? in
+                switch Validations.validate(password: password) {
+                case let .short(minimumLength):
+                    return Strings.shortPasswordMessage(minimumLength: minimumLength)
+                default:
+                    return nil
+                }
+            })
+
+            let stateValidation = state.map({ state -> String? in
+                switch state {
+                case .failed(LoginError.invalidCredentials):
+                    return Strings.invalidCredentialsMessage
+                default:
+                    return nil
+                }
+            })
+
+            return Observable.merge(offlineValidation, stateValidation)
         }
 
         static func isButtonEnabled(
@@ -74,16 +109,24 @@ private extension LoginViewModel {
             password: Observable<String?>
         ) -> Observable<Bool> {
 
-            // TODO: complete
-            return .empty()
+            return Observable
+                .combineLatest(email, password)
+                .map({ email, password in
+                    if let email = email, let password = password {
+                        return Validations.validate(email: email) == .ok
+                            && Validations.validate(password: password) == .ok
+                    } else {
+                        return false
+                    }
+                })
+                .startWith(false)
         }
 
         static func isActivityIndicatorAnimating(
             state: Observable<LoginState>
         ) -> Observable<Bool> {
 
-            // TODO: complete
-            return .empty()
+            return state.map({ $0 == .inProgress })
         }
 
         static func action(
@@ -93,8 +136,21 @@ private extension LoginViewModel {
             password: Observable<String?>
         ) -> Observable<LoginAction> {
 
-            // TODO: complete
-            return .empty()
+            let loginAction = buttonTap
+                .withLatestFrom(
+                    Observable.combineLatest(email, password)
+                )
+                .map({ email, password in
+                    LoginAction.login(email: email, password: password)
+                })
+
+            let successAcknowledgementAction = state
+                .filter({ $0 == .successful })
+                .map({ _ in
+                    LoginAction.acknowledgeSuccess
+                })
+
+            return Observable.merge(loginAction, successAcknowledgementAction)
         }
     }
 }
