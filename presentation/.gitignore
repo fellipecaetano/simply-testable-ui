@@ -1,8 +1,0 @@
-# Cruft
-.DS_Store
-
-# vim
-*.swp
-
-# Assets
-Assets/
