@@ -32,7 +32,10 @@ final class LoginViewController: UIViewController {
     }
 
     private func setUpBindings() {
-        // TODO: complete
+        viewModel.output
+            .emailValidation
+            .bind(to: emailTextField.rx.text)
+            .disposed(by: disposeBag)
     }
 }
 
